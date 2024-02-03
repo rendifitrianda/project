@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Produk;
+// use App\Models\User;
+
+
+
+use Faker;
 
 class ProdukController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+     function index()
     {
-        $data['list_produk'] = Produk::all();
+        // $data ['list_produk'] = Produk::all();   
+        $user = request()->user();
+        $data['list_produk'] = $user->Produk;
         return view('produk.index', $data);
     }
 
@@ -24,6 +28,7 @@ class ProdukController extends Controller
      */
     public function create()
     {
+
         return view('produk.create');
     }
 
@@ -32,8 +37,9 @@ class ProdukController extends Controller
      */
     public function store()
     {
-        // dd(request()->all()); 
+        // dd(request()->all());                
         $produk = new produk;
+        $produk->id_user = request()->user()->id;
         $produk->nama = request('nama');
         $produk->stok = request('stok');
         $produk->harga = request('harga');
@@ -41,7 +47,9 @@ class ProdukController extends Controller
         $produk->deskripsi = request('deskripsi');
         $produk->save();
 
-        return redirect('produk')->with('success', 'Data Berhasil Di Tambahkan');
+        $produk->handleUploadFoto();
+
+        return redirect('admin/produk')->with('success', 'Data Berhasil Di Tambahkan');
     }
 
     
@@ -78,7 +86,7 @@ class ProdukController extends Controller
         $produk->deskripsi = request('deskripsi');
         $produk->save();
 
-        return redirect('produk')->with('warning', 'Data Berhasil Di Edit');
+        return redirect('admin/produk')->with('success', 'Data Berhasil Di Edit');
     }
 
     /**
@@ -87,6 +95,25 @@ class ProdukController extends Controller
     public function delete(Produk $produk)
     {
         $produk->delete();
-        return redirect('produk');
+        return redirect('admin/produk');
+    }
+
+    function filter()
+    {
+        $nama =  request('nama');
+        $stok = explode(",",request('stok'));
+        $data['harga_min'] = $harga_min = request('harga_min');
+        $data['harga_max'] = $harga_max = request('harga_max');
+
+
+        //JIKA INGIN MENGGUNAKAN SALAH SATU FILTER HARUS DI MATIKAN KE 2NYA//
+        $data['list_produk'] =  Produk::where('nama', 'like', "%$nama%")->get();
+        $data['list_produk'] =  Produk::whereIn('stok', $stok)->get();
+        $data['list_produk'] =  Produk::whereBetween('harga', [$harga_min, $harga_max])->get();
+        $data['nama'] = $nama;
+
+
+        return view('produk.index', $data);
     }
 }
+

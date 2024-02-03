@@ -7,7 +7,7 @@
                         Data Barang
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('kategori') }}" method="POST" enctype="multipart/form-data">
+                        <form action="{{ url('admin/kategori') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="control-label">Nama</label>

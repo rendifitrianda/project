@@ -20,14 +20,15 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ url('beranda') }}"><b>Toko</b>BAROKAH</a>
+            <a href="{{ url('admin/beranda') }}"><b>Toko</b>BAROKAH</a>
         </div>
         <!-- /.login-logo -->
         <div class="card">
             <div class="card-body login-card-body">
-                <p class="login-box-msg">Sign in to start your session</p>
+                <p class="login-box-msg">Sign in to start your sessio</p>
 
-                <x-button.notif />
+                <x-button.notifalert />
+
                 <form action="{{ url('login') }}" method="post">
                     @csrf
                     <div class="input-group mb-3">

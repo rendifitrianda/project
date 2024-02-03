@@ -13,6 +13,7 @@
                             <dd>{{ '@' . $user->nama }}</dd>
                             <dt>Alamat Email</dt>
                             <dd>{{ $user->email }}</dd>
+                            <dd>No Handphone : {{ $user->detail->no_handphone }}</dd>
                         </dl>
                     </div>
                 </div>

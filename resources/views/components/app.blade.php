@@ -18,6 +18,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <link rel="stylesheet" href="{{ url('public') }}/plugins/fontawesome-free/css/all.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ url('public') }}/dist/css/adminlte.min.css">
+    <!-- include summernote css/js -->
+
+
 </head>
 
 <body class="hold-transition sidebar-mini">
@@ -31,7 +34,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        <x-button.notif />
+                        {{-- <x-button.notif /> --}}
+                        <x-button.notifalert />
                     </div>
                 </div>
             </div>
@@ -53,7 +57,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
     <script src="{{ url('public') }}/dist/js/adminlte.min.js"></script>
 
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
-
 
     @stack('script')
 </body>

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserDetail;
+use App\Http\Requests\UserStoreRequest;
 
 class UserController extends Controller
 {
@@ -12,7 +14,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $data['list_user'] = user::all();
+        $data['list_user'] = user::withCount('produk')->get();
         return view('user.index', $data);
     }
     /**
@@ -26,17 +28,26 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store()
+
+
+    public function store(UserStoreRequest $request)
     {
         $user = new user;
         $user->nama = request('nama');
         $user->email = request('email');
+
+        //password sudah memakai mutator yang ada di models user jadi tidak perlu memakai kan Bcrypt di controller
         $user->password = bcrypt(request('password'));
         $user-> save();
 
-        return redirect('user')->with('success', 'Data Berhasil Di Tambah');
-    }
+        $userDetail = new UserDetail;
+        $userDetail->id_user = $user->id;
+        $userDetail->no_handphone = request('no_handphone');
+        $userDetail-> save();
 
+        return redirect('admin/user')->with('success', 'Data Berhasil Di Tambah');
+    }
+     
     /**
      * Display the specified resource.
      */
@@ -62,9 +73,9 @@ class UserController extends Controller
     {
         $user->nama = request('nama');
         $user->email = request('email');
-        if (request('password')) $user->password = request('password');
+        if (request('password')) $user->password = bcrypt(request('password'));
 
-        return redirect('user')->with('warning', 'Data berhasil Di Edit');
+        return redirect('admin/user')->with('success', 'Data berhasil Di Edit');
     }
 
     /**
@@ -73,6 +84,6 @@ class UserController extends Controller
     public function delete(user $user)
     {
         $user->delete();
-        return redirect('user');
+        return redirect('admin/user');
     }
 }

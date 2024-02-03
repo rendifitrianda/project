@@ -33,15 +33,15 @@ class KategoriController extends Controller
         $namaFile = $file->hashName();
         $simpanFile = $file->storeAs('foto', $namaFile);
 
-        // $kategori  = new kategori;
-        // $kategori->nama = request('nama');
-        // $kategori->harga = request('harga');
-        // $kategori->foto =  $namaFile;
-        // $kategori->deskripsi = request('deskripsi');
-        // $kategori->expired = request('expired');
-        // $kategori->save();
+        $kategori  = new kategori;
+        $kategori->nama = request('nama'); 
+        $kategori->harga = request('harga');
+        $kategori->foto =  $namaFile;
+        $kategori->deskripsi = request('deskripsi');
+        $kategori->expired = request('expired');
+        $kategori->save();
 
-        return redirect('kategori')->with('success', 'Data Berhasil Di Tambahkan');;
+        return redirect('admin/kategori')->with('success', 'Data Berhasil Di Tambahkan');;
     }
 
     /**
@@ -75,7 +75,7 @@ class KategoriController extends Controller
         $kategori->expired = request('expired');
         $kategori->save();
 
-        return redirect('kategori')->with('warning', 'Data Berhasil Di Edit');;
+        return redirect('admin/kategori')->with('success', 'Data Berhasil Di Edit');;
     }
 
     /**
@@ -84,6 +84,6 @@ class KategoriController extends Controller
     public function delete(Kategori $kategori)
     {
         $kategori->delete();
-        return redirect('kategori');
+        return redirect('admin/kategori');
     }
 }

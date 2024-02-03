@@ -13,9 +13,14 @@
                             <br>Rp. {{ $produk->harga }}
                             <br>Stok : {{ $produk->stok }}
                             <br>Berat : {{ $produk->berat }} kg
+                            <br>seller : {{ $produk->seller->nama }}
+                            <br>tanggal Produk : {{ $produk->created_at->format('d M Y') }}
                         </p>
                         <p>
-                            {{ $produk->deskripsi }}
+                            deskripsi: {{ $produk->deskripsi }}
+                        </p>
+                        <p>
+                            <img src="{{ asset('public/' . $produk->foto) }}" alt="">
                         </p>
                     </div>
                 </div>

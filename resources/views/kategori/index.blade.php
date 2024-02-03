@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="card-header">
                         Tambah Produk
-                        <a href="{{ url('kategori/create') }}" class="btn btn-info float-right"><i
+                        <a href="{{ url('admin/kategori/create') }}" class="btn btn-info float-right"><i
                                 class="fa fa-plus"></i>Tambah</a>
 
                     </div>
@@ -24,9 +24,9 @@
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
                                             <div class="btn-group">
-                                                <x-button.btn url="{{ url('kategori/show', $kategori->id) }}"
+                                                <x-button.btn url="{{ url('admin/kategori/show', $kategori->id) }}"
                                                     class="primary" icon="info" />
-                                                <x-button.btn url="{{ url('kategori/edit', $kategori->id) }}"
+                                                <x-button.btn url="{{ url('admin/kategori/edit', $kategori->id) }}"
                                                     class="warning" icon="edit" />
                                                 <x-button.nontification id="{{ $kategori->id }}" />
                                             </div>

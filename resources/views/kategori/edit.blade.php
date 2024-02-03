@@ -7,7 +7,7 @@
                         Data Barang
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('kategori', $kategori->id) }}" method=Post>
+                        <form action="{{ url('admin/kategori', $kategori->id) }}" method=POST>
                             @csrf
                             @method('post')
                             <div class="form-group">

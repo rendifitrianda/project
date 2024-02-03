@@ -16,7 +16,11 @@
         <!-- Messages Dropdown Menu -->
         <li class="nav-item dropdown">
             <a class="nav-link" data-toggle="dropdown" href="#">
-                Rendi Fitrianda
+                @if (Auth::check())
+                    {{ request()->user()->nama }}
+                @else
+                    silahkan login
+                @endif
                 <img src="{{ url('public') }}/dist/img/user2-160x160.jpg" style="height: 100%" class="img-circle"
                     alt="User Image">
             </a>
@@ -37,7 +41,7 @@
                         </i>
                     </div>
                 </a>
-                <a href="{{ url('login') }}" class="dropdown-item">
+                <a href="{{ url('logout') }}" class="dropdown-item">
                     <!-- Message Start -->
                     <div class="media">
                         <i class="fa fa-sign-out">

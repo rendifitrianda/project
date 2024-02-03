@@ -16,7 +16,11 @@
             </div>
             <div class="info">
                 <a href="#" class="d-block">
-                    {{ Auth::user()->nama }}
+                    @if (Auth::check())
+                        {{ request()->user()->nama }}
+                    @else
+                        silahkan login
+                    @endif
                 </a>
             </div>
         </div>
@@ -26,10 +30,10 @@
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
-                <x-template.sidebar-item url="{{ url('beranda') }}" icon="home" label="Beranda" />
-                <x-template.sidebar-item url="{{ url('produk') }}" icon="th" label="Produk" />
-                <x-template.sidebar-item url="{{ url('kategori') }}" icon="th" label="Kategori" />
-                <x-template.sidebar-item url="{{ url('user') }}" icon="user" label="User" />
+                <x-template.sidebar-item url="{{ url('admin/beranda') }}" icon="home" label="Beranda" />
+                <x-template.sidebar-item url="{{ url('admin/produk') }}" icon="th" label="Produk" />
+                <x-template.sidebar-item url="{{ url('admin/kategori') }}" icon="th" label="Kategori" />
+                <x-template.sidebar-item url="{{ url('admin/user') }}" icon="user" label="User" />
 
 
                 <li class="nav-item menu-open">
@@ -41,8 +45,8 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
-                        <x-template.sidebar-item url="{{ url('pelanggan') }}" circle="circle" label="User" />
-                        <x-template.sidebar-item url="{{ url('suplier') }}" circle="circle" label="Suplier" />
+                        <x-template.sidebar-item url="{{ url('admin/pelanggan') }}" circle="circle" label="User" />
+                        <x-template.sidebar-item url="{{ url('admin/suplier') }}" circle="circle" label="Suplier" />
 
                     </ul>
                 </li>

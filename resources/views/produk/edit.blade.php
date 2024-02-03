@@ -7,7 +7,7 @@
                         Tambah Data
                     </div>
                     <div class="card-body">
-                        <form action="{{ url('produk', $produk->id) }}" method="Post">
+                        <form action="{{ url('admin/produk', $produk->id) }}" method="POST">
                             @csrf
                             @method('post')
                             <div class="form-group">
